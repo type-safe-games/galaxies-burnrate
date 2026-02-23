@@ -78,21 +78,32 @@ economic:
 social:
   oppressed:
     name: "Oppressed"
-    passenger_volume_modifier: 2.0  # Double the people trying to flee
-    passenger_payout_modifier: 0.6  # But they are poor and pay less
-    crew_hire_modifier: 0.5         # Cheap, desperate labor
-    event_pool: []
+    passenger_volume_modifier: 2.0  
+    passenger_payout_modifier: 0.6  
+    event_pool: ["wage_demand", "fare_evader"]
+    cantina_pool:
+      fringe_drifter: 10          # 10 tickets in the lottery (Very common)
+      indentured_worker: 5        # 5 tickets
+      android_surplus: 2          # 2 tickets
+      syndicate_defector: 1       # 1 ticket (Rare)
 
   gilded:
     name: "Gilded"
-    passenger_volume_modifier: 0.5  # Few people traveling
-    passenger_payout_modifier: 3.0  # VIPs willing to pay massive premiums
-    crew_hire_modifier: 2.0         # Highly trained, expensive labor
-    event_pool: []
+    passenger_volume_modifier: 0.5  
+    passenger_payout_modifier: 3.0  
+    event_pool: ["fare_evader"]
+    cantina_pool:
+      academy_grad: 10            # Snobby academy kids are everywhere here
+      android_nexus: 3            # High-end tech available
+      ex_military: 2              # Private security
 
   frontier:
     name: "Frontier"
-    passenger_volume_modifier: 1.2  # Steady flow of hopeful travelers
-    passenger_payout_modifier: 1.0  # Standard ticket prices
-    crew_hire_modifier: 0.8         # Gritty, affordable crew
-    event_pool: []
+    passenger_volume_modifier: 1.2  
+    passenger_payout_modifier: 1.0  
+    event_pool: ["pirate_extortion", "wage_demand"]
+    cantina_pool:
+      fringe_drifter: 8
+      ex_military: 5
+      android_surplus: 4
+      syndicate_defector: 2

@@ -43,7 +43,7 @@ origins:
   academy_grad:
     name: "Academy Graduate"
     description: "By-the-book professionals. Reliable, but they know their worth."
-    skill_range: [4, 7]
+    skill_range: [4, 8]
     hire_fee_multiplier: 1.5      # Costs 50% more upfront to hire
     salary_multiplier: 1.2        # Demands 20% higher daily wages
 
@@ -74,7 +74,6 @@ origins:
     skill_range: [7, 10]
     hire_fee_multiplier: 1.0      # Standard upfront
     salary_multiplier: 1.0        # Standard pay
-    # (Secretly adds 'syndicate_assassin' to the transit event pool!)
 
   android_surplus:
     name: "Surplus Labor-Droid"
@@ -86,6 +85,6 @@ origins:
   android_nexus:
     name: "Nexus-Tier Synth"
     description: "State-of-the-art artificial crew member."
-    skill_range: [9, 9]           # Fixed at incredible efficiency
+    skill_range: [9, 10]           # Fixed at incredible efficiency
     hire_fee_multiplier: 25.0     # Astronomically expensive
     salary_multiplier: 0.0        # No salary

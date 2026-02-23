@@ -1,0 +1,121 @@
+# modules.yaml
+# Defines the bolt-on components for the 20-slot ship chassis.
+
+modules:
+  # --- ENGINES ---
+  basic_engine:
+    name: "Basic Thruster"
+    type: "engine"
+    tier: "basic"
+    base_price: 1500
+    stats:
+      speed: 1.0
+      fuel_burn_rate: 1.0
+
+  pulse_engine:
+    name: "Pulse Engine"
+    type: "engine"
+    tier: "intermediate"
+    base_price: 4000
+    stats:
+      speed: 1.5                  # Faster travel, less chance of random events
+      fuel_burn_rate: 0.8         # 20% more fuel efficient
+
+  antimatter_drive:
+    name: "Antimatter Drive"
+    type: "engine"
+    tier: "advanced"
+    base_price: 12000
+    stats:
+      speed: 2.5
+      fuel_burn_rate: 0.5
+
+  # --- FUEL TANKS ---
+  basic_tank:
+    name: "Standard Fuel Tank"
+    type: "fuel_tank"
+    tier: "basic"
+    base_price: 800
+    stats:
+      capacity: 100
+
+  extended_tank:
+    name: "Extended Fuel Tank"
+    type: "fuel_tank"
+    tier: "intermediate"
+    base_price: 2500
+    stats:
+      capacity: 250
+
+  # --- CREW & PASSENGERS ---
+  basic_crew_cabin:
+    name: "Cramped Quarters"
+    type: "crew_cabin"
+    tier: "basic"
+    base_price: 1000
+    stats:
+      crew_capacity: 2            # Fits Pilot + 1 crew member
+
+  standard_passenger_cabin:
+    name: "Standard Transit Cabin"
+    type: "passenger_cabin"
+    tier: "basic"
+    base_price: 1200
+    stats:
+      passenger_capacity: 4
+      payout_multiplier: 1.0      # Standard ticket price
+
+  luxury_passenger_suite:
+    name: "Luxury Suite"
+    type: "passenger_cabin"
+    tier: "advanced"
+    base_price: 8000
+    stats:
+      passenger_capacity: 2       # Takes up a whole slot for just 2 people...
+      payout_multiplier: 3.0      # ...but they pay 3x the standard rate
+
+  # --- CARGO HOLDS ---
+  standard_hold:
+    name: "Standard Cargo Hold"
+    type: "cargo_hold"
+    tier: "basic"
+    base_price: 1000
+    stats:
+      cargo_capacity: 50
+    protects_flags: []            # Zero protection. Raw-dogging the cosmos.
+
+  cryo_hold:
+    name: "Cryo-Hold"
+    type: "cargo_hold"
+    tier: "intermediate"
+    base_price: 3000
+    stats:
+      cargo_capacity: 40          # Slightly less space due to insulation
+    protects_flags: ["perishable"]
+
+  containment_hold:
+    name: "Containment Hold"
+    type: "cargo_hold"
+    tier: "intermediate"
+    base_price: 3500
+    stats:
+      cargo_capacity: 40
+    protects_flags: ["hazardous"]
+
+  padded_hold:
+    name: "Padded Hold"
+    type: "cargo_hold"
+    tier: "intermediate"
+    base_price: 2800
+    stats:
+      cargo_capacity: 45
+    protects_flags: ["fragile"]
+
+  smugglers_compartment:
+    name: "Smuggler's Compartment"
+    type: "cargo_hold"
+    tier: "advanced"
+    base_price: 6000
+    stats:
+      cargo_capacity: 20          # Very small space
+    protects_flags: ["illegal"]   # Bypasses security scans

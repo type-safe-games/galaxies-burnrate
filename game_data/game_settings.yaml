@@ -27,7 +27,7 @@ cargo_mechanics:
 time_mechanics:
   travel_days_per_unit_distance: 1.0      # Base days to travel 1 grid coordinate (modified by Engine Speed)
   crew_salary_interval_days: 7            # Crew demands their accrued pay every 7 days
-  market_refresh_days: 1                  # Advancing 1 day refreshes terminal contracts/passengers
+  market_refresh_days: 3                  # Advancing days refreshes terminal contracts/passengers
 
 contract_mechanics:
   # Timed contracts pay more but carry heavy penalties

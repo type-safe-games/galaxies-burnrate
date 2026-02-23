@@ -5,28 +5,61 @@ import (
 	"context"
 	"embed"
 	"galaxies-burn-rate/internal/data"
+
+	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
-// App struct
 type App struct {
 	ctx        context.Context
 	gameDataFS embed.FS
 }
 
-// NewApp creates a new App application struct
 func NewApp(fs embed.FS) *App {
 	return &App{
 		gameDataFS: fs,
 	}
 }
 
-// startup is called when the app starts. The context is saved
-// so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-// GetGameData is exposed to the Vue frontend
-func (a *App) GetGameData() map[string]string {
-	return data.LoadEmbeddedGameData(a.gameDataFS)
+// CreateNewGame triggers the extraction pattern for a new save
+func (a *App) CreateNewGame(captainName string, shipName string) string {
+	saveID, err := data.CreateNewSave(a.gameDataFS, captainName, shipName)
+	if err != nil {
+		return ""
+	}
+	return saveID
+}
+
+// LoadGameData fetches all YAMLs from a specific save folder
+func (a *App) LoadGameData(saveID string) map[string]string {
+	return data.LoadSaveGame(saveID)
+}
+
+// GetAvailableSaves exposes the directory scanner to the frontend
+func (a *App) GetAvailableSaves() []data.SaveMeta {
+	return data.GetAvailableSaves()
+}
+
+// --- WINDOW MANAGEMENT ---
+
+// SetDisplayMode handles windowed vs fullscreen
+func (a *App) SetDisplayMode(mode string) {
+	if mode == "fullscreen" || mode == "borderless" {
+		runtime.WindowFullscreen(a.ctx)
+	} else {
+		runtime.WindowUnfullscreen(a.ctx)
+	}
+}
+
+// SetResolution resizes the window explicitly
+func (a *App) SetResolution(width int, height int) {
+	runtime.WindowSetSize(a.ctx, width, height)
+	runtime.WindowCenter(a.ctx)
+}
+
+func (a *App) QuitGame() {
+	runtime.Quit(a.ctx)
 }
