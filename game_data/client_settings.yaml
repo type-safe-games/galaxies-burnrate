@@ -1,0 +1,10 @@
+# clientsettings.yaml
+display:
+  width: 1280
+  height: 720
+  fullscreen: false
+audio:
+  master_volume: 0.8
+debug:
+  skip_splash: true
+  dev_mode: true

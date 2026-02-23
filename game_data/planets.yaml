@@ -1,0 +1,56 @@
+# planets.yaml
+# The static, hard-coded map of the galaxy.
+
+planets:
+  # --- THE CORE WORLDS ---
+  - id: "plt_prime"
+    name: "Terra Prime"
+    coordinates: { x: 0, y: 0 }
+    scale: 10                       # Massive market volume
+    facilities: ["refuel", "dockyard", "terminal", "cantina", "shipyard"] # Full service
+    traits:
+      political: "bureaucracy"
+      economic: "industrial"
+      social: "gilded"
+      
+  # --- THE MID-RIM ---
+  - id: "plt_demeter"
+    name: "Demeter"
+    coordinates: { x: 4, y: -5 }
+    scale: 6                        # Average market volume
+    facilities: ["refuel", "dockyard", "terminal", "cantina"] # No shipyard; agri-focus
+    traits:
+      political: "dictatorship"
+      economic: "agrarian"
+      social: "oppressed"
+
+  - id: "plt_heph"
+    name: "Hephaestus"
+    coordinates: { x: -3, y: 2 }
+    scale: 5
+    facilities: ["refuel", "dockyard", "cantina", "shipyard"] # Pure industry, no passenger terminal
+    traits:
+      political: "bureaucracy"
+      economic: "extraction"
+      social: "oppressed"
+
+  # --- THE OUTER FRINGE ---
+  - id: "plt_bacch"
+    name: "Bacchus"
+    coordinates: { x: -12, y: -9 }
+    scale: 3                        # Small, highly volatile market
+    facilities: ["refuel", "dockyard", "cantina"] # Scum, villainy, and ore
+    traits:
+      political: "anarchy"
+      economic: "extraction"
+      social: "frontier"
+
+  - id: "plt_morta"
+    name: "Roma Morta"
+    coordinates: { x: 8, y: 11 }
+    scale: 2
+    facilities: ["refuel", "dockyard"] # Barebones smuggler drop-off
+    traits:
+      political: "anarchy"
+      economic: "agrarian"
+      social: "frontier"

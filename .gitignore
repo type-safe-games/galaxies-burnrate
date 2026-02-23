@@ -1,0 +1,48 @@
+# =========================
+# Wails & Go Backend
+# =========================
+# Ignore the compiled executables Wails builds
+build/bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Ignore Go workspace/vendor files
+vendor/
+go.work
+go.work.sum
+
+# =========================
+# Vue & Node Frontend
+# =========================
+# Ignore massive node module folders
+node_modules/
+frontend/node_modules/
+
+# Ignore compiled frontend assets
+frontend/dist/
+
+# Ignore local environment variables and npm logs
+.env.local
+.env.*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# OS & Editor specific
+# =========================
+# VS Code (or code-server) workspace settings
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Windows/Mac system files
+.DS_Store
+Thumbs.db
+desktop.ini

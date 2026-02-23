@@ -1,0 +1,98 @@
+# planet_traits.yaml
+# The building blocks for the galaxy. 
+
+political:
+  dictatorship:
+    name: "Dictatorship"
+    tax_rate: 0.15                  # 15% cut on all trades
+    docking_fee: 500                # Expensive to land
+    insurance_chance: 0.9           # 90% of contracts require insurance
+    insurance_fee: 0.25             # Upfront deposit is 25% of the total payout
+    customs_scan_chance: 0.85       # Highly regulated airspace, almost guaranteed scan
+    contraband_fine: 5000           # Crippling flat fine if illicit goods are found
+    event_pool: []
+
+  anarchy:
+    name: "Anarchy"
+    tax_rate: 0.0                   # No taxes
+    docking_fee: 50                 # Cheap landing
+    insurance_chance: 0.1           # Almost no contracts require insurance (wild west)
+    insurance_fee: 0.10             # If they do, it's a small fee (or a local warlord's cut)
+    customs_scan_chance: 0.05       # Barely any organized security
+    contraband_fine: 500            # Not really a "fine", more of a standard bribe to look the other way
+    event_pool: []
+
+  bureaucracy:
+    name: "Bureaucracy"
+    tax_rate: 0.08                  # Moderate taxes
+    docking_fee: 150                # Standard landing fee
+    insurance_chance: 0.6           # 60% of contracts require standard insurance
+    insurance_fee: 0.15             # Upfront deposit is 15% of the total payout
+    customs_scan_chance: 0.40       # Standard randomized port authority checks
+    contraband_fine: 2000           # Hefty bureaucratic penalty
+    event_pool: []
+
+economic:
+  industrial:
+    name: "Industrial"
+    base_value_modifier: 1.0        # Average contract payouts
+    fuel_price_modifier: 0.8        # Fuel is cheap and abundant
+    repair_price_modifier: 0.7      # Repairs are cheap
+    module_price_modifier: 0.9      # Ship parts are slightly cheaper
+    module_availability:
+      basic: 10                     # Massive stock of basic parts
+      intermediate: 8               # Good stock of intermediate parts
+      advanced: 3                   # A few advanced parts available
+    production_focus: []
+    demand_focus: []
+    event_pool: []
+
+  agrarian:
+    name: "Agrarian"
+    base_value_modifier: 0.8        # Local goods pay less
+    fuel_price_modifier: 1.5        # Fuel is imported and expensive
+    repair_price_modifier: 1.2      # Lack of infrastructure makes repairs pricey
+    module_price_modifier: 1.2      # Parts are expensive
+    module_availability:
+      basic: 5                      # Only a few basic parts
+      intermediate: 1               # Very rare to find anything better
+      advanced: 0                   # No advanced tech sold here
+    production_focus: []
+    demand_focus: []
+    event_pool: []
+
+  extraction:
+    name: "Extraction"
+    base_value_modifier: 0.9        # Slightly lower contract payouts
+    fuel_price_modifier: 1.1        # Fuel is slightly pricey
+    repair_price_modifier: 0.9      # Lots of rough repair gear around
+    module_price_modifier: 1.0      # Standard module pricing
+    module_availability:
+      basic: 7                      # Good basic stock
+      intermediate: 4               # Decent intermediate stock
+      advanced: 0                   # No advanced tech
+    production_focus: []
+    demand_focus: []
+    event_pool: []
+
+social:
+  oppressed:
+    name: "Oppressed"
+    passenger_volume_modifier: 2.0  # Double the people trying to flee
+    passenger_payout_modifier: 0.6  # But they are poor and pay less
+    crew_hire_modifier: 0.5         # Cheap, desperate labor
+    event_pool: []
+
+  gilded:
+    name: "Gilded"
+    passenger_volume_modifier: 0.5  # Few people traveling
+    passenger_payout_modifier: 3.0  # VIPs willing to pay massive premiums
+    crew_hire_modifier: 2.0         # Highly trained, expensive labor
+    event_pool: []
+
+  frontier:
+    name: "Frontier"
+    passenger_volume_modifier: 1.2  # Steady flow of hopeful travelers
+    passenger_payout_modifier: 1.0  # Standard ticket prices
+    crew_hire_modifier: 0.8         # Gritty, affordable crew
+    event_pool: []

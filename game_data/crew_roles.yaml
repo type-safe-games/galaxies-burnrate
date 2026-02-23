@@ -1,0 +1,91 @@
+# crew.yaml
+# Defines the scaling math for jobs, and the background origins of the people doing them.
+
+roles:
+  pilot:
+    name: "Pilot"
+    stat_modifiers:
+      evasion_bonus_per_skill: 0.02         # Level 10 = 20% bonus
+    event_modifiers:
+      prevent_hazard_chance_per_skill: 0.01 # Level 10 = 10% chance to dodge
+
+  navigator:
+    name: "Navigator"
+    stat_modifiers:
+      fuel_burn_reduction_per_skill: 0.015  # Level 10 = 15% reduction
+      travel_time_reduction_per_skill: 0.01 # Level 10 = 10% faster
+    event_modifiers:
+      transit_event_reduction_per_skill: 0.02
+
+  engineer:
+    name: "Engineer"
+    stat_modifiers:
+      repair_cost_reduction_per_skill: 0.03 # Level 10 = 30% cheaper repairs
+    event_modifiers:
+      prevent_malfunction_chance_per_skill: 0.05 # Level 10 = 50% chance to fix
+
+  steward:
+    name: "Steward"
+    stat_modifiers:
+      passenger_payout_bonus_per_skill: 0.025 # Level 10 = 25% larger payouts
+    event_modifiers:
+      prevent_social_chance_per_skill: 0.06 # Level 10 = 60% chance to stop runners
+
+  dockworker:
+    name: "Dockworker"
+    stat_modifiers:
+      cargo_loading_efficiency_per_skill: 0.05
+    event_modifiers:
+      cargo_protection_bonus_per_skill: 0.01 # Level 5 fully negates the 5% base failure
+      chain_reaction_reduction_per_skill: 0.02
+
+origins:
+  academy_grad:
+    name: "Academy Graduate"
+    description: "By-the-book professionals. Reliable, but they know their worth."
+    skill_range: [4, 7]
+    hire_fee_multiplier: 1.5      # Costs 50% more upfront to hire
+    salary_multiplier: 1.2        # Demands 20% higher daily wages
+
+  fringe_drifter:
+    name: "Fringe Drifter"
+    description: "Desperate for a bunk. They learn on the job."
+    skill_range: [1, 4]
+    hire_fee_multiplier: 0.5      # Very cheap to hire
+    salary_multiplier: 0.7        # Will work for peanuts
+
+  ex_military:
+    name: "Dishonorably Discharged"
+    description: "Highly trained, but comes with baggage."
+    skill_range: [6, 9]
+    hire_fee_multiplier: 2.0      # Expensive upfront signing bonus
+    salary_multiplier: 1.5        # Expensive upkeep
+
+  indentured_worker:
+    name: "Indentured Contract"
+    description: "You are buying their corporate debt. They work for free until it's paid."
+    skill_range: [2, 5]
+    hire_fee_multiplier: 4.0      # Massive upfront cost to buy the contract
+    salary_multiplier: 0.0        # 0 credits per day!
+
+  syndicate_defector:
+    name: "Syndicate Defector"
+    description: "Brilliant, but currently hiding from very bad people."
+    skill_range: [7, 10]
+    hire_fee_multiplier: 1.0      # Standard upfront
+    salary_multiplier: 1.0        # Standard pay
+    # (Secretly adds 'syndicate_assassin' to the transit event pool!)
+
+  android_surplus:
+    name: "Surplus Labor-Droid"
+    description: "A clunky, outdated unit. Doesn't sleep, doesn't eat."
+    skill_range: [4, 4]           # Androids cannot level up or roll randomly. Fixed at 4.
+    hire_fee_multiplier: 5.0      # Expensive to purchase
+    salary_multiplier: 0.0        # No salary
+
+  android_nexus:
+    name: "Nexus-Tier Synth"
+    description: "State-of-the-art artificial crew member."
+    skill_range: [9, 9]           # Fixed at incredible efficiency
+    hire_fee_multiplier: 25.0     # Astronomically expensive
+    salary_multiplier: 0.0        # No salary

@@ -1,0 +1,146 @@
+# commodities.yaml
+# Defines the trade goods, their base values for contract math, and storage risks.
+
+categories:
+  - id: "essential"
+    name: "Essential"
+  - id: "industrial"
+    name: "Industrial"
+  - id: "medical"
+    name: "Medical"
+  - id: "scientific"
+    name: "Scientific"
+  - id: "raw_materials"
+    name: "Raw Materials"
+  - id: "luxury"
+    name: "Luxury"
+  - id: "bulk"
+    name: "Bulk"
+
+commodities:
+  # --- ESSENTIAL ---
+  purified_water:
+    name: "Purified Water"
+    category: "essential"
+    base_value: 10                  # Low deposit, low payout
+    flags: []
+
+  hydroponic_produce:
+    name: "Hydroponic Produce"
+    category: "essential"
+    base_value: 35
+    flags: ["perishable"]
+
+  livestock:
+    name: "Live Agri-Stock"
+    category: "essential"
+    base_value: 150
+    flags: ["perishable", "hazardous"]             
+
+  # --- INDUSTRIAL ---
+  machined_parts:
+    name: "Machined Parts"
+    category: "industrial"
+    base_value: 80
+    flags: []
+
+  heavy_mining_equipment:
+    name: "Heavy Mining Equipment"
+    category: "industrial"
+    base_value: 400
+    flags: []
+  
+  plasma_conduits:
+    name: "Plasma Conduits"
+    category: "industrial"
+    base_value: 250                 
+    flags: ["hazardous"]            
+
+  weapons_grade_munitions:
+    name: "Weapons-Grade Munitions"
+    category: "industrial"
+    base_value: 800                 # Massive deposit required
+    flags: ["hazardous", "illegal"] 
+
+  # --- MEDICAL ---
+  standard_medkits:
+    name: "Standard Medkits"
+    category: "medical"
+    base_value: 120
+    flags: []
+
+  cryo_organs:
+    name: "Cryo-Organs"
+    category: "medical"
+    base_value: 600
+    flags: ["perishable", "fragile"] 
+
+  combat_stimulants:
+    name: "Combat Stimulants"
+    category: "medical"
+    base_value: 450
+    flags: ["illegal"]              
+
+  # --- SCIENTIFIC ---
+  data_cores:
+    name: "Data Cores"
+    category: "scientific"
+    base_value: 300
+    flags: ["fragile"]              
+
+  live_specimens:
+    name: "Live Alien Specimens"
+    category: "scientific"
+    base_value: 1200
+    flags: ["hazardous", "perishable", "illegal"] 
+
+  # --- RAW MATERIALS ---
+  unrefined_ore:
+    name: "Unrefined Ore"
+    category: "raw_materials"
+    base_value: 40
+    flags: []
+  
+  rare_earth_minerals:
+    name: "Rare-Earth Minerals"
+    category: "raw_materials"
+    base_value: 600
+    flags: []
+
+  radioactive_isotopes:
+    name: "Radioactive Isotopes"
+    category: "raw_materials"
+    base_value: 400
+    flags: ["hazardous", "illegal"] 
+
+  # --- LUXURY ---
+  synth_silk:
+    name: "Synth-Silk"
+    category: "luxury"
+    base_value: 150
+    flags: []
+
+  vintage_spirits:
+    name: "Vintage Spirits"
+    category: "luxury"
+    base_value: 500
+    flags: ["fragile"]
+
+  designer_narcotics:
+    name: "Designer Narcotics"
+    category: "luxury"
+    base_value: 1500
+    flags: ["illegal", "fragile"]   # Highly profitable, highly illegal, easily broken              
+
+  # --- BULK ---
+  scrap_metal:
+    name: "Scrap Metal"
+    category: "bulk"
+    base_value: 5
+    flags: []                       
+
+  bio_waste:
+    name: "Bio-Waste"
+    category: "bulk"
+    base_value: 0                   # No deposit required, purely paid to haul
+    flags: ["hazardous"]

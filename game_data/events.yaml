@@ -1,0 +1,121 @@
+# events.yaml
+# Defines the narrative encounters, choices, and mechanical outcomes.
+
+events:
+  # --- LAW & ORDER ---
+  customs_inspection:
+    name: "Surprise Customs Inspection"
+    type: "political"
+    trigger_phase: "landing"      # Triggers during the orbital docking sequence
+    description: "A local patrol boat paints you with targeting lasers and demands you cut your engines for a cargo manifest audit."
+    choices:
+      - id: "submit"
+        label: "Power down and submit to the scan."
+        outcomes:
+          - action: "trigger_scan"
+            target: "illegal"
+      - id: "bribe"
+        label: "Transmit a 'docking fee' directly to the captain."
+        requirements:
+          credits: 1000
+        outcomes:
+          - action: "lose_credits"
+            amount: 1000
+            
+  # --- COMBAT & HAZARDS ---
+  pirate_extortion:
+    name: "Pirate Interdiction"
+    type: "hazard"
+    trigger_phase: "transit"      # Triggers in deep space between planets
+    description: "An unregistered frigate drops out of warp dead ahead. They demand a 'toll' for safe passage."
+    choices:
+      - id: "pay_toll"
+        label: "Pay the toll."
+        requirements:
+          credits: 2000
+        outcomes:
+          - action: "lose_credits"
+            amount: 2000
+      - id: "jettison_cargo"
+        label: "Dump a random cargo pod to distract them."
+        outcomes:
+          - action: "lose_random_cargo"
+            amount: 10
+      - id: "flee"
+        label: "Evasive maneuvers! Punch the drive!"
+        outcomes:
+          - action: "skill_check"
+            type: "flee"
+            success_chance: 0.5   
+            fail_penalty:
+              - action: "damage_hull"
+                amount: 25
+              - action: "damage_fragile_cargo"
+                chance: 0.3
+
+  # --- SHIP MALFUNCTIONS ---
+  refrigeration_failure:
+    name: "Coolant Leak"
+    type: "malfunction"
+    trigger_phase: "transit"
+    trigger_condition:
+      has_cargo_flag: "perishable"
+    description: "Warning sirens blare. The primary coolant line to your cargo holds has ruptured."
+    choices:
+      - id: "emergency_repairs"
+        label: "Use repair materials to patch it."
+        requirements:
+          credits: 500            
+        outcomes:
+          - action: "lose_credits"
+            amount: 500
+      - id: "let_it_rot"
+        label: "Seal the bulkhead and cut the power. We'll lose the shipment."
+        outcomes:
+          - action: "destroy_flagged_cargo"
+            target: "perishable"
+            percent: 0.5          
+
+  # --- PASSENGERS & SOCIAL ---
+  fare_evader:
+    name: "The Runner"
+    type: "social"
+    trigger_phase: "landing"
+    trigger_condition:
+      has_passengers: true
+    description: "As you dock, one of your passengers bypasses the terminal checkpoint and sprints into the crowd without paying their ticket fee."
+    choices:
+      - id: "let_them_go"
+        label: "Not worth the bullet. Let them go."
+        outcomes:
+          - action: "lose_passenger_payout"
+            amount: 1
+      - id: "chase"
+        label: "Send the crew to hunt them down."
+        outcomes:
+          - action: "skill_check"
+            success_chance: 0.6
+            success_reward:
+              - action: "gain_credits"
+                amount: 500       
+            fail_penalty:
+              - action: "crew_injury"
+                duration_days: 3
+
+  # --- CREW MANAGEMENT ---
+  wage_demand:
+    name: "Labor Dispute"
+    type: "crew"
+    trigger_phase: "landing"
+    description: "Your engineer corners you in the mess hall. They want a hazard pay increase, effective immediately, or they walk."
+    choices:
+      - id: "pay_up"
+        label: "Agree to the raise."
+        outcomes:
+          - action: "modify_crew_salary"
+            multiplier: 1.2
+      - id: "deny"
+        label: "Tell them to get back to work or get out the airlock."
+        outcomes:
+          - action: "modify_morale"
+            amount: -20

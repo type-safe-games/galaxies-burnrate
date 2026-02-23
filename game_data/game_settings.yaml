@@ -1,0 +1,50 @@
+# gamesettings.yaml
+# Global rules, balance levers, and base costs.
+
+economy_baselines:
+  base_fuel_cost: 5             
+  base_repair_cost: 15          
+  base_passenger_ticket: 100    
+  base_crew_salary: 50          
+  base_crew_hire_fee: 250       
+
+player_defaults:
+  starting_credits: 5000
+  starting_ship:
+    max_slots: 10               
+    installed_modules:
+      - slot_1: "basic_engine"
+      - slot_2: "basic_tank"
+      - slot_3: "basic_crew_cabin"
+      - slot_4: "standard_hold" 
+
+cargo_mechanics:
+  base_protection_failure_chance: 0.05
+  isolated_hold_failure_chance: 0.01      
+  thorough_search_escalation_chance: 0.25 
+  hazardous_chain_reaction_chance: 0.20   
+
+time_mechanics:
+  travel_days_per_unit_distance: 1.0      # Base days to travel 1 grid coordinate (modified by Engine Speed)
+  crew_salary_interval_days: 7            # Crew demands their accrued pay every 7 days
+  market_refresh_days: 1                  # Advancing 1 day refreshes terminal contracts/passengers
+
+contract_mechanics:
+  # Timed contracts pay more but carry heavy penalties
+  timed_bonus_multiplier: 1.5             # 50% bonus to the payout fee for rush delivery
+  late_penalty_percentage: 0.10           # Deducts 10% of the total payout for EVERY day late
+  
+  # Limits for goods inherently tied to time (flags: "perishable")
+  perishable_min_days: 3
+  perishable_max_days: 8
+  
+  # Limits for standard goods (e.g., a factory desperately needs machined parts)
+  standard_timed_chance: 0.30             # 30% chance a normal contract is generated as a "rush job"
+  standard_min_days: 5
+  standard_max_days: 15
+
+feature_toggles:
+  require_refuel: true          
+  require_repairs: true
+  enable_cascading_risks: true            
+  enable_timed_contracts: true            # Toggle false to make all deliveries have infinite time
