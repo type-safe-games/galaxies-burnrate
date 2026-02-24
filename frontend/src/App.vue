@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useSettingsStore } from './stores/settingsStore'
 import SplashScreen from './components/SplashScreen.vue'
 import MainMenu from './components/MainMenu.vue'
@@ -11,37 +11,13 @@ import GameUI from './components/GameUI.vue'
 const settings = useSettingsStore()
 const currentView = ref('splash')
 
-// --- GAME CANVAS SCALING ---
-const scale = ref(1)
-
-const updateScale = () => {
-  const designWidth = 1920
-  const designHeight = 1080
-  const windowWidth = window.innerWidth
-  const windowHeight = window.innerHeight
-  
-  const scaleX = windowWidth / designWidth
-  const scaleY = windowHeight / designHeight
-  
-  // Maintain 16:9 aspect ratio by scaling to the most restrictive dimension
-  scale.value = Math.min(scaleX, scaleY)
-}
-
 onMounted(() => {
   settings.applyTheme()
 
   if (settings.debug.skip_splash) {
     currentView.value = 'main_menu'
   }
-
-  updateScale()
-  window.addEventListener('resize', updateScale)
 })
-
-onUnmounted(() => {
-  window.removeEventListener('resize', updateScale)
-})
-// ---------------------------
 
 const navigateTo = (view: string) => {
   currentView.value = view
@@ -49,7 +25,7 @@ const navigateTo = (view: string) => {
 </script>
 
 <template>
-  <main class="app-container" :style="{ transform: `scale(${scale})` }">
+  <main class="app-container">
     <SplashScreen v-if="currentView === 'splash'" @navigate="navigateTo" />
     <MainMenu v-if="currentView === 'main_menu'" @navigate="navigateTo" />
     <OptionsMenu v-if="currentView === 'options'" @navigate="navigateTo" />
@@ -61,9 +37,9 @@ const navigateTo = (view: string) => {
 
 <style scoped>
 .app-container {
-  width: 1920px;
-  height: 1080px;
-  transform-origin: center center;
+  /* Let the app take up 100% of the viewport */
+  width: 100vw;
+  height: 100vh;
   position: relative;
   background-color: var(--bg-color);
   overflow: hidden;
