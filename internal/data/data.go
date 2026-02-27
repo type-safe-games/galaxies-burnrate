@@ -23,23 +23,35 @@ type ClientSettings struct {
 	} `yaml:"debug"`
 }
 
+// GameSettings represents the static configuration in game_settings.yaml
+type GameSettings struct {
+	PlayerDefaults struct {
+		StartingCredits  int    `yaml:"starting_credits"`
+		StartingLocation string `yaml:"starting_location"`
+		StartingFuel     int    `yaml:"starting_fuel"`
+	} `yaml:"player_defaults"`
+}
+
 // SaveState represents the dynamic player data in save_state.yaml
 type SaveState struct {
-	SaveID      string `json:"save_id"`
-	CaptainName string `yaml:"captain_name"`
-	ShipName    string `yaml:"ship_name"`
-	Credits     int    `yaml:"credits"`
-	CurrentDay  int    `yaml:"current_day"`
+	SaveID          string `json:"save_id"`
+	CaptainName     string `yaml:"captain_name" json:"captain_name"`
+	ShipName        string `yaml:"ship_name" json:"ship_name"`
+	Credits         int    `yaml:"credits" json:"credits"`
+	CurrentDay      int    `yaml:"current_day" json:"current_day"`
+	CurrentLocation string `yaml:"current_location" json:"current_location"`
+	CurrentFuel     int    `yaml:"current_fuel" json:"current_fuel"`
 }
 
 // SaveMeta holds the summary data to display on the Load Screen.
-// We use JSON tags so Wails can neatly convert this to a TypeScript array.
 type SaveMeta struct {
-	SaveID      string `json:"save_id"`
-	CaptainName string `json:"captain_name" yaml:"captain_name"`
-	ShipName    string `json:"ship_name" yaml:"ship_name"`
-	Credits     int    `json:"credits" yaml:"credits"`
-	CurrentDay  int    `json:"current_day" yaml:"current_day"`
+	SaveID          string `json:"save_id"`
+	CaptainName     string `json:"captain_name" yaml:"captain_name"`
+	ShipName        string `json:"ship_name" yaml:"ship_name"`
+	Credits         int    `json:"credits" yaml:"credits"`
+	CurrentDay      int    `json:"current_day" yaml:"current_day"`
+	CurrentLocation string `json:"current_location" yaml:"current_location"`
+	CurrentFuel     int    `json:"current_fuel" yaml:"current_fuel"`
 }
 
 // LoadClientSettings handles the Extraction Pattern for user preferences.
@@ -126,12 +138,10 @@ func CreateNewSave(fs embed.FS, captainName string, shipName string) (string, er
 	savesDir := filepath.Join(configDir, "GalaxiesBurnRate", "saves")
 	os.MkdirAll(savesDir, 0755)
 
-	// Generate a unique folder name using the current Unix timestamp
 	saveID := fmt.Sprintf("save_%d", time.Now().Unix())
 	newSavePath := filepath.Join(savesDir, saveID)
 	os.MkdirAll(newSavePath, 0755)
 
-	// Copy the static game data over to this specific save folder
 	filesToCopy := []string{
 		"planets.yaml",
 		"planet_traits.yaml",
@@ -149,12 +159,26 @@ func CreateNewSave(fs embed.FS, captainName string, shipName string) (string, er
 		}
 	}
 
-	// Generate the initial save_state.yaml
+	// --- NEW: Read the defaults directly from the embedded game_settings.yaml ---
+	var settings GameSettings
+	settingsData, err := fs.ReadFile("game_data/game_settings.yaml")
+	if err == nil {
+		yaml.Unmarshal(settingsData, &settings)
+	} else {
+		// Absolute fallback just in case the file is missing/corrupted
+		settings.PlayerDefaults.StartingCredits = 5000
+		settings.PlayerDefaults.StartingLocation = "plt_prime"
+		settings.PlayerDefaults.StartingFuel = 100
+	}
+
+	// Generate the initial save_state.yaml using the parsed YAML defaults
 	initialState := SaveState{
-		CaptainName: captainName,
-		ShipName:    shipName,
-		Credits:     5000, // We can sync this with gamesettings defaults later
-		CurrentDay:  1,
+		CaptainName:     captainName,
+		ShipName:        shipName,
+		Credits:         settings.PlayerDefaults.StartingCredits,
+		CurrentDay:      1,
+		CurrentLocation: settings.PlayerDefaults.StartingLocation,
+		CurrentFuel:     settings.PlayerDefaults.StartingFuel,
 	}
 
 	stateData, _ := yaml.Marshal(&initialState)

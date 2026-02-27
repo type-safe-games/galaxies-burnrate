@@ -10,6 +10,7 @@ economy_baselines:
 
 player_defaults:
   starting_credits: 5000
+  starting_planet: "plt_prime"
   starting_ship:
     max_slots: 10               
     installed_modules:
